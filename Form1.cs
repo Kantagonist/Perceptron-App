@@ -22,7 +22,7 @@ namespace Perceptron_App
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
+            
         }
 
         private void solvableModel_Click(object sender, EventArgs e)
@@ -38,10 +38,11 @@ namespace Perceptron_App
         private void button1_Click(object sender, EventArgs e)
         {
             //generates the new dataset
-            string amount = textBox1.Text; //FIXME Text is empty even though textbox is filled
-            int amt = 22;
-            List<ModelPoint> model = modelGenerator.GenerateNewSet(amt, radioButton2.Checked);
-            Console.WriteLine(modelGenerator.toString());
+            string amount = textBox1.Text;
+            List<ModelPoint> model = modelGenerator.GenerateNewSet(int.Parse(amount), radioButton2.Checked);
+            
+            //prints the given model on the console (enable for debugging)
+            //Console.WriteLine(modelGenerator.toString());
 
             //TODO draw the dataset on the canvas
             Graphics g = this.CreateGraphics();
@@ -82,6 +83,11 @@ namespace Perceptron_App
             {
                 e.Handled = true;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
