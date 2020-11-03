@@ -14,7 +14,10 @@ namespace Perceptron_App
     /// </summary>
     class Solver
     {
-
+        public Straightline findSolutionFor(List<ModelPoint> model)
+        {
+            return null; //test return
+        }
     }
 
     /// <summary>
@@ -49,5 +52,13 @@ namespace Perceptron_App
         {
             return (M * X) + B;
         }
+    }
+
+    /// <summary>
+    /// Signals the non-solvability of the model.
+    /// </summary>
+    class NoSolutionException : System.Exception
+    {
+
     }
 }
