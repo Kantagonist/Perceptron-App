@@ -20,35 +20,34 @@ namespace Perceptron_App
         /// <param name="errorThreshold"></param>
         public void train(List<ModelPoint> points, float errorThreshold)
         {
+            //set configs
+            float[] initialWeights = new float[] { 0, 0.5f, 0.5f };
+            float learningRate = 0.1f;
+
             //initialize the weight vectors with 0
-            Dictionary<ModelPoint, List<float>> weights = new Dictionary<ModelPoint, List<float>>();
+            Dictionary<ModelPoint, float[]> weights = new Dictionary<ModelPoint, float[]>();
             for(int i = 0; i < points.Count; ++i)
             {
-                List<float> temp = new List<float>
-                {
-                    0,
-                    0,
-                    0
-                };
-                weights.Add(points[i], temp);
+                weights.Add(points[i], initialWeights);
             }
 
             //initialize the threshold
 
             //actual learning, but capped with a hard stop if iteration error can not be reached
+            float[] y = new float[points.Count];
             int hardStop = 1000; //adjust at will
             for(int iteration = 0; iteration < hardStop; ++iteration)
             {
-                foreach (KeyValuePair<ModelPoint, List<float>> entry in weights)
-                {
-                    //calculate the output of the threshold function
-
-                    //update the weights
-
+                //calculate the output of the threshold function
+                int k = 0;
+                foreach (KeyValuePair<ModelPoint, float[]> entry in weights)
+                {    
+                    y[k++] = entry.Value[0] + (entry.Key.X * entry.Value[1]) + (entry.Key.Y * entry.Value[2]);
                 }
 
-                //calculate the iteration error
+                //calculate the iteration error, break if enough
 
+                //update the weights
             }
         }
 
