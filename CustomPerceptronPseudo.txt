@@ -1,9 +1,0 @@
-﻿Perceptron(List<ModelPoint> points):
-
-train():
-	List<Triple> weights; 
-	i=0;
-	foreach point in points:
-		weights[++i] = (1, points[i].X, points[i].y);
-	
-
