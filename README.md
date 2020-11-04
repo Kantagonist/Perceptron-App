@@ -6,5 +6,6 @@ Its goal is too find a line which separates the two groups of points into their 
 
 This can be done with a purely deterministic greedy algorithm.
 However, that takes too long and teaches me nothing about ML.
-Instead i will build a linear classifier, using a perceptron from Microsoft's libraries.
+Instead i will build a linear classifier, using a purpose-built perceptron
 
+In general, the idea is to generate a model, let the perceptron learn it and let him find the answer.
