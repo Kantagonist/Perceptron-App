@@ -60,12 +60,13 @@ namespace Perceptron_App
                     weights[1] = weights[1] + (learningRate * d * entry.X);
                     weights[2] = weights[2] + (learningRate * d * entry.Y);
                 }
-            }
-        }
 
-        private int threshold(Dictionary<ModelPoint, int> weights, float bias)
-        {
-            return 0; //TODO implement me
+                //calculate the iteration error, if below the set threshhold, break the loop
+                float correctMargin = ((float)points.Count) / ((float)misclassified.Count);
+                if (correctMargin >= iterationError) break;
+            }
+
+            //TODO find a way to make a graph out of the weights
         }
     }
 }
