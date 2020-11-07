@@ -33,7 +33,7 @@ namespace Perceptron_App
                 for (int i = 0; i < AmountOfPoints; ++i)
                 {
                     Color Color = ((i + 1) % 2 == 0) ? Color.Red : Color.Blue;
-                    ModelPoint NewPoint = new ModelPoint(rand.Next(0, 100), rand.Next(0, 100), Color);
+                    ModelPoint NewPoint = new ModelPoint(rand.Next(1, 100), rand.Next(1, 100), Color);
                     points.Add(NewPoint);
                 }
             }
@@ -43,12 +43,14 @@ namespace Perceptron_App
                 {
                     if((i+1) % 2 == 0)
                     {
-                        ModelPoint NewPoint = new ModelPoint(rand.Next(0, 49), rand.Next(0, 100), Color.Red);
+                        int x = rand.Next(1, 98);
+                        ModelPoint NewPoint = new ModelPoint(x, rand.Next(1, 99 - x), Color.Red);
                         points.Add(NewPoint);
                     }
-                    else
+                    else//rechts
                     {
-                        ModelPoint NewPoint = new ModelPoint(rand.Next(51, 100), rand.Next(0, 100), Color.Blue);
+                        int x = rand.Next(1, 98);
+                        ModelPoint NewPoint = new ModelPoint(x, rand.Next(100 - x, 100), Color.Blue);
                         points.Add(NewPoint);
                     }
                 }

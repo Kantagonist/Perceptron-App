@@ -9,6 +9,11 @@ namespace Perceptron_App
 {
     class Perceptron
     {
+        public float[] weights
+        {
+            get { return weights; }
+            private set { weights = value; }
+        }
 
         public Straightline Solution
         {
@@ -28,7 +33,7 @@ namespace Perceptron_App
         public void train(List<ModelPoint> points, float errorThreshold)
         {
             //set configs
-            float[] weights = new float[] { 0, 0.5f, 0.5f };
+            weights = new float[] { 0, 0.5f, 0.5f };
             float learningRate = 0.1f;
             float iterationError = 0.95f;
 
@@ -74,6 +79,36 @@ namespace Perceptron_App
             }
 
             //TODO find a way to make a graph out of the weights
+        }
+
+        /// <summary>
+        /// Checks what colour the system classifies the given point.
+        /// HINT: only use after the system is trained
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <returns>Returns the calculated colour of the point.</returns>
+        public Color testPoint(int x1, int x2)
+        {
+            float Y = weights[0] + (x1 * weights[1]) + (x2 * weights[2]);
+            if(Y > 0) //colour is red
+            {
+                return Color.Red;
+            }
+            else //colour is blue
+            {
+                return Color.Blue;
+            }
+        }
+
+        /// <summary>
+        /// Takes the weights and the bias.
+        /// Calculates the decision boundary for the perceptron.
+        /// </summary>
+        /// <returns></returns>
+        private void getFunction()
+        {
+              
         }
     }
 }
