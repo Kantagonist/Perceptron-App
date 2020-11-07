@@ -155,5 +155,23 @@ namespace Perceptron_App
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            if(textBox2.Text == "" || textBox3.Text == "")
+            {
+                try
+                {
+                    x = int.Parse(textBox2.Text);
+                    y = int.Parse(textBox3.Text);
+                    Color solution = S.TestPoint(x, y);
+                    //TODO paint the point on the model
+                }catch(FormatException exception)
+                {
+                    MessageBox.Show("Please input a point between 0 and 99 into the fields for X and Y, otherwise the system recognizes a wrong input");
+                }
+            }
+        }
     }
 }

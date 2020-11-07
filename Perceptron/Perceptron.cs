@@ -22,7 +22,7 @@ namespace Perceptron_App
             get { return Solution; }
             private set { Solution = value;  }
         }
-        public Perceptron()
+        internal Perceptron()
         {
 
         }
@@ -32,7 +32,7 @@ namespace Perceptron_App
         /// </summary>
         /// <param name="points"></param>
         /// <param name="errorThreshold"></param>
-        public void train(List<ModelPoint> points, float errorThreshold)
+        internal void train(List<ModelPoint> points, float errorThreshold)
         {
             //set configs
             weights = new float[] { 0, 0.5f, 0.5f };
@@ -96,7 +96,7 @@ namespace Perceptron_App
         /// <param name="x1"></param>
         /// <param name="x2"></param>
         /// <returns>Returns the calculated colour of the point.</returns>
-        public Color testPoint(int x1, int x2)
+        internal Color testPoint(int x1, int x2)
         {
             float Y = weights[0] + (x1 * weights[1]) + (x2 * weights[2]);
             if(Y > 0) //colour is red
