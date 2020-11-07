@@ -13,7 +13,8 @@ namespace Perceptron_App
 {
     public partial class Form1 : Form
     {
-        ModelGenerator modelGenerator = new ModelGenerator();
+        private ModelGenerator modelGenerator = new ModelGenerator();
+        private Point[] dividingLine = new Point[2];
 
         public Form1()
         {
@@ -80,8 +81,21 @@ namespace Perceptron_App
             }
         }
 
+        /// <summary>
+        /// Creates the line which divides the points.
+        /// TODO call the training method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            if(dividingLine[0] == null) //replace the existing line
+            {
+                
+            }
+            else //create a new line
+            { 
+            }
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
