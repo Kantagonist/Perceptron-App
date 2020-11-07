@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -78,7 +80,13 @@ namespace Perceptron_App
                 if (iteration == (hardStop - 1)) throw new NoSolutionException();
             }
 
-            //TODO find a way to make a graph out of the weights
+            //fills in the newly found decision boundary
+            getFunction();
+        }
+
+        internal void ResetWeights()
+        {
+            weights = new float[] { 0, 0.5f, 0.5f };
         }
 
         /// <summary>
@@ -108,7 +116,9 @@ namespace Perceptron_App
         /// <returns></returns>
         private void getFunction()
         {
-              
+            float m = (-(weights[0] / weights[2])) / (weights[0] / weights[1]);
+            float xIntercept = (-weights[0]) / weights[2];
+            this.Solution = new Straightline(m, xIntercept);
         }
     }
 }

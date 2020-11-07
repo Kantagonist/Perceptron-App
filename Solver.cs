@@ -15,11 +15,23 @@ namespace Perceptron_App
     /// </summary>
     class Solver
     {
-        public static Straightline FindSolutionFor(List<ModelPoint> model)
+        Perceptron p;
+
+        public Straightline FindSolutionFor(List<ModelPoint> model)
         {
-            Perceptron p = new Perceptron();
+            p = new Perceptron();
             p.train(model, 0.95f);
             return p.Solution;
+        }
+
+        public Color TestPoint(int x, int y)
+        {
+            return p.testPoint(x, y); 
+        }
+
+        public void Reset()
+        {
+            p.ResetWeights();
         }
     }
 

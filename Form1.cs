@@ -16,6 +16,7 @@ namespace Perceptron_App
         private ModelGenerator modelGenerator = new ModelGenerator();
         List<Point> Line = new List<Point>();
         private Graphics g;
+        Solver S = new Solver();
 
         public Form1()
         {
@@ -91,7 +92,7 @@ namespace Perceptron_App
         private void button2_Click(object sender, EventArgs e)
         {
             //solves the point list to a 95% accuracy
-            Straightline Solution = Solver.FindSolutionFor(modelGenerator.points);
+            Straightline Solution = S.FindSolutionFor(modelGenerator.points);
             int[] line = new int[4];
             for(int i = 0; i <= 100; ++i)
             {
