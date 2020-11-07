@@ -15,9 +15,11 @@ namespace Perceptron_App
     /// </summary>
     class Solver
     {
-        public Straightline findSolutionFor(List<ModelPoint> model)
+        public static Straightline FindSolutionFor(List<ModelPoint> model)
         {
-            return null; //test return
+            Perceptron p = new Perceptron();
+            p.train(model, 0.95f);
+            return p.Solution;
         }
     }
 
@@ -31,27 +33,21 @@ namespace Perceptron_App
             get { return M; }
             set { M = value; }
         }
-        float X
-        {
-            get { return X; }
-            set { X = value; }
-        }
         float B
         {
             get { return B; }
             set { B = value; }
         }
 
-        public Straightline(float m, float x, float b )
+        public Straightline(float m, float b )
         {
             M = m;
-            X = x;
             B = b;
         }
 
-        public float getY()
+        public float F(int x)
         {
-            return (M * X) + B;
+            return (M * x) + B;
         }
     }
 

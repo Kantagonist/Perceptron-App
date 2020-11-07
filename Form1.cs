@@ -14,7 +14,8 @@ namespace Perceptron_App
     public partial class Form1 : Form
     {
         private ModelGenerator modelGenerator = new ModelGenerator();
-        private Point[] dividingLine = new Point[2];
+        List<Point> Line = new List<Point>();
+        private Graphics g;
 
         public Form1()
         {
@@ -48,7 +49,7 @@ namespace Perceptron_App
                 //Console.WriteLine(modelGenerator.toString());
 
                 //draws the dataset on the canvas
-                Graphics g = this.CreateGraphics();
+                g = this.CreateGraphics();
                 g.Clear(Color.White);
                 Pen p = new Pen(Color.Black);
                 Pen blueP = new Pen(Color.Blue);
@@ -89,13 +90,41 @@ namespace Perceptron_App
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            if(dividingLine[0] == null) //replace the existing line
+            //solves the point list to a 95% accuracy
+            Straightline Solution = Solver.FindSolutionFor(modelGenerator.points);
+            int[] line = new int[4];
+            for(int i = 0; i <= 100; ++i)
             {
-                
+                if(Solution.F(i) >= 0)
+                {
+                    line[0] = i;
+                    line[1] = (int) Solution.F(i);
+                    for(int j = i; j <= 100; ++j)
+                    {
+                        if(Solution.F(j) >= 100)
+                        {
+                            line[2] = j;
+                            line[3] = (int)Solution.F(j);
+                        }
+                        break;
+                    }
+                    break;
+                }
             }
-            else //create a new line
-            { 
+
+            //remove the existing line, if there is one
+            if(Line.Count == 2)
+            {
+                Line.RemoveAt(0);
+                Line.RemoveAt(1);
             }
+
+            //create a new line
+            Pen pen = new Pen(Color.Blue);
+            Point a = new Point((line[0] * 7) + 25, (line[1] * 7) + 25);
+            Point b = new Point((line[2] * 7) + 25, (line[3] * 7) + 25);
+            g.DrawLine(pen, a, b);
+            Refresh();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)

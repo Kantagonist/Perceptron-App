@@ -9,6 +9,12 @@ namespace Perceptron_App
 {
     class Perceptron
     {
+
+        public Straightline Solution
+        {
+            get { return Solution; }
+            private set { Solution = value;  }
+        }
         public Perceptron()
         {
 
@@ -64,6 +70,7 @@ namespace Perceptron_App
                 //calculate the iteration error, if below the set threshhold, break the loop
                 float correctMargin = ((float)points.Count) / ((float)misclassified.Count);
                 if (correctMargin >= iterationError) break;
+                if (iteration == (hardStop - 1)) throw new NoSolutionException();
             }
 
             //TODO find a way to make a graph out of the weights
