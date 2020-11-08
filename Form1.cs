@@ -76,7 +76,7 @@ namespace Perceptron_App
                     }
                 }
                 Pen pen = new Pen(Color.Blue);
-                g.DrawLine(pen, line[0], line[1], line[2], line[3]);
+                g.DrawLine(pen, (line[0] * 7) + 25, (line[1] * 7) + 25, (line[3] * 7) + 25, (line[4] * 7) + 25);
             }
         }
 
@@ -144,10 +144,10 @@ namespace Perceptron_App
         private void button4_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
-            RedrawModel(
-                modelGenerator.points,
-                new Straightline(rand.Next(1, 4), 20)
-                );
+            float m = rand.Next(1, 4);
+            float b = 20f;
+            Straightline y = new Straightline(m, b);
+            RedrawModel(modelGenerator.points, y);
         }
     }
 }
