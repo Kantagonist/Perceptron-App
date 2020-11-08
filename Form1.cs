@@ -173,5 +173,23 @@ namespace Perceptron_App
                 }
             }
         }
+
+        Random rand = new Random();
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (g == null) return;
+
+            if (Line.Count == 2)
+            {
+                Line.Clear();
+            }
+
+            Pen pen = new Pen(Color.Blue);
+            Point a = new Point((rand.Next(1,99) * 7) + 25, (rand.Next(1, 99) * 7) + 25);
+            Point b = new Point((rand.Next(1, 99) * 7) + 25, (rand.Next(1, 99) * 7) + 25);
+            Line.Add(a);
+            Line.Add(b);
+            g.DrawLine(pen, a, b);
+        }
     }
 }
