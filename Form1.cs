@@ -53,7 +53,7 @@ namespace Perceptron_App
                 }
             }
 
-            //paints the straight line on the canvas
+            //paints the straight line on the canvas TODO fix the StackOverflow Error, which comes up.
             if(decisionBoundary != null)
             {
                 int[] line = new int[4];
@@ -75,6 +75,8 @@ namespace Perceptron_App
                         break;
                     }
                 }
+                Pen pen = new Pen(Color.Blue);
+                g.DrawLine(pen, line[0], line[1], line[2], line[3]);
             }
         }
 
