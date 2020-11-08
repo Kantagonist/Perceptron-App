@@ -53,7 +53,7 @@ namespace Perceptron_App
                 }
             }
 
-            //paints the straight line on the canvas TODO fix the StackOverflow Error, which comes up.
+            //paints the straight line on the canvas
             if(decisionBoundary != null)
             {
                 int[] line = new int[4];
@@ -76,6 +76,7 @@ namespace Perceptron_App
                     }
                 }
                 Pen pen = new Pen(Color.Blue);
+                //TODO fix the out of bound error, probably because the m in straightline doesn't translate
                 g.DrawLine(pen, (line[0] * 7) + 25, (line[1] * 7) + 25, (line[3] * 7) + 25, (line[4] * 7) + 25);
             }
         }
