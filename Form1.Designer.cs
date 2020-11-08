@@ -55,7 +55,6 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Solvable Model";
             this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -96,7 +95,6 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "Train ";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // textBox1
             // 
@@ -105,6 +103,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(53, 20);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "20";
             // 
             // textBox2
             // 
@@ -191,7 +190,6 @@
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Perception Generator";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

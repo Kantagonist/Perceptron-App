@@ -23,59 +23,75 @@ namespace Perceptron_App
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void RedrawModel(List<ModelPoint> model, Straightline decisionBoundary)
         {
-            
-        }
+            //draws the dataset on the canvas
+            g = this.CreateGraphics();
+            g.Clear(Color.White);
+            Pen p = new Pen(Color.Black);
+            Pen blueP = new Pen(Color.Blue);
+            Pen redP = new Pen(Color.Red);
 
-        private void solvableModel_Click(object sender, EventArgs e)
-        {
+            //draws the coordinate system
+            g.DrawLine(p, 25, 700, 25, 0);
+            g.DrawLine(p, 25, 700, 725, 700);
 
-        }
+            //draws the points 
+            List<ModelPoint> pointList = modelGenerator.points;
+            if (pointList.Count > 0)
+            {
+                for (int i = 0; i < pointList.Count; ++i)
+                {
+                    if (pointList[i].Color == Color.Blue)
+                    {
+                        g.DrawEllipse(blueP, 25 + (pointList[i].X * 7), 700 - (pointList[i].Y * 7), 7, 7);
+                    }
+                    else
+                    {
+                        g.DrawEllipse(redP, 25 + (pointList[i].X * 7), 700 - (pointList[i].Y * 7), 7, 7);
+                    }
+                }
+            }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
+            //paints the straight line on the canvas
+            if(decisionBoundary != null)
+            {
+                int[] line = new int[4];
+                for (int i = 0; i <= 100; ++i)
+                {
+                    if (decisionBoundary.F(i) >= 0)
+                    {
+                        line[0] = i;
+                        line[1] = (int)decisionBoundary.F(i);
+                        for (int j = i; j <= 100; ++j)
+                        {
+                            if (decisionBoundary.F(j) >= 100)
+                            {
+                                line[2] = j;
+                                line[3] = (int)decisionBoundary.F(j);
+                            }
+                            break;
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //generates the new dataset
+            //get amount of points generated
             string amount = textBox1.Text;
             try
             {
+                //generating the model
                 List<ModelPoint> model = modelGenerator.GenerateNewSet(int.Parse(amount), radioButton2.Checked);
                 
                 //prints the given model on the console (enable for debugging)
                 //Console.WriteLine(modelGenerator.toString());
-
-                //draws the dataset on the canvas
-                g = this.CreateGraphics();
-                g.Clear(Color.White);
-                Pen p = new Pen(Color.Black);
-                Pen blueP = new Pen(Color.Blue);
-                Pen redP = new Pen(Color.Red);
-
-                //draws the coordinate system
-                g.DrawLine(p, 25, 700, 25, 0);
-                g.DrawLine(p, 25, 700, 725, 700);
-
-                //draws the points 
-                List<ModelPoint> pointList = modelGenerator.points;
-                if (pointList.Count > 0)
-                {
-                    for (int i = 0; i < pointList.Count; ++i)
-                    {
-                        if (pointList[i].Color == Color.Blue)
-                        {
-                            g.DrawEllipse(blueP, 25 + (pointList[i].X * 7), 700 - (pointList[i].Y * 7), 7, 7);
-                        }
-                        else
-                        {
-                            g.DrawEllipse(redP, 25 + (pointList[i].X * 7), 700 - (pointList[i].Y * 7), 7, 7);
-                        }
-                    }
-                }
+                
+                //drawing the newly generated model on the canvas
+                RedrawModel(model, null);
             }
             catch (System.FormatException exception)
             {
@@ -93,39 +109,7 @@ namespace Perceptron_App
         {
             //solves the point list to a 95% accuracy
             Straightline Solution = S.FindSolutionFor(modelGenerator.points);
-            int[] line = new int[4];
-            for(int i = 0; i <= 100; ++i)
-            {
-                if(Solution.F(i) >= 0)
-                {
-                    line[0] = i;
-                    line[1] = (int) Solution.F(i);
-                    for(int j = i; j <= 100; ++j)
-                    {
-                        if(Solution.F(j) >= 100)
-                        {
-                            line[2] = j;
-                            line[3] = (int)Solution.F(j);
-                        }
-                        break;
-                    }
-                    break;
-                }
-            }
-
-            //remove the existing line, if there is one
-            if(Line.Count == 2)
-            {
-                Line.RemoveAt(0);
-                Line.RemoveAt(1);
-            }
-
-            //create a new line
-            Pen pen = new Pen(Color.Blue);
-            Point a = new Point((line[0] * 7) + 25, (line[1] * 7) + 25);
-            Point b = new Point((line[2] * 7) + 25, (line[3] * 7) + 25);
-            g.DrawLine(pen, a, b);
-            Refresh();
+            RedrawModel(modelGenerator.points, Solution);
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -134,26 +118,6 @@ namespace Perceptron_App
             {
                 e.Handled = true;
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -174,22 +138,14 @@ namespace Perceptron_App
             }
         }
 
-        Random rand = new Random();
+        
         private void button4_Click(object sender, EventArgs e)
         {
-            if (g == null) return;
-
-            if (Line.Count == 2)
-            {
-                Line.Clear();
-            }
-
-            Pen pen = new Pen(Color.Blue);
-            Point a = new Point((rand.Next(1,99) * 7) + 25, (rand.Next(1, 99) * 7) + 25);
-            Point b = new Point((rand.Next(1, 99) * 7) + 25, (rand.Next(1, 99) * 7) + 25);
-            Line.Add(a);
-            Line.Add(b);
-            g.DrawLine(pen, a, b);
+            Random rand = new Random();
+            RedrawModel(
+                modelGenerator.points,
+                new Straightline(rand.Next(1, 4), 20)
+                );
         }
     }
 }
