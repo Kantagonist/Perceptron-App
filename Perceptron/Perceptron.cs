@@ -11,17 +11,9 @@ namespace Perceptron_App
 {
     class Perceptron
     {
-        public float[] weights
-        {
-            get { return weights; }
-            private set { weights = value; }
-        }
+        public float[] weights;
+        public Straightline Solution;
 
-        public Straightline Solution
-        {
-            get { return Solution; }
-            private set { Solution = value;  }
-        }
         internal Perceptron()
         {
 
@@ -40,9 +32,9 @@ namespace Perceptron_App
             float iterationError = 0.95f;
 
             //actual learning, but capped with a hard stop if iteration error can not be reached
-            float[] y = new float[points.Count];
+            float[] y;
             List<ModelPoint> misclassified = new List<ModelPoint>();
-            int hardStop = 1000; //adjust at will
+            int hardStop = 1000000; //adjust at will
             for(int iteration = 0; iteration < hardStop; ++iteration)
             {
                 //reset counters and arrays
@@ -75,9 +67,9 @@ namespace Perceptron_App
                 }
 
                 //calculate the iteration error, if below the set threshhold, break the loop
-                float correctMargin = ((float)points.Count) / ((float)misclassified.Count);
+                float correctMargin =(float)misclassified.Count / (float)points.Count;
+                printLearnCycleOnConsole(iteration, misclassified.Count);
                 if (correctMargin >= iterationError) break;
-                if (iteration == (hardStop - 1)) throw new NoSolutionException();
             }
 
             //fills in the newly found decision boundary
@@ -119,6 +111,14 @@ namespace Perceptron_App
             float m = (-(weights[0] / weights[2])) / (weights[0] / weights[1]);
             float xIntercept = (-weights[0]) / weights[2];
             this.Solution = new Straightline(m, xIntercept);
+        }
+
+        private void printLearnCycleOnConsole(int cycle, int amountOfMisclassified)
+        {
+            Console.WriteLine(
+                "Cycle:\t" + cycle +
+                "\tweights:\t{" + weights[0] + ", " + weights[1] + ", " + weights[2] + "´}" +
+                "\twrong:\t" + amountOfMisclassified);
         }
     }
 }
