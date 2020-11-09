@@ -69,15 +69,17 @@ namespace Perceptron_App
                             {
                                 line[2] = j;
                                 line[3] = (int)decisionBoundary.F(j);
+                                break;
                             }
-                            break;
                         }
                         break;
                     }
                 }
                 Pen pen = new Pen(Color.Blue);
+                Point a = new Point((line[0] * 7) + 25, (line[1] * 7) + 25);
+                Point b = new Point((line[2] * 7) + 25, (line[3] * 7) + 25);
                 //TODO fix the out of bound error, probably because the m in straightline doesn't translate
-                g.DrawLine(pen, (line[0] * 7) + 25, (line[1] * 7) + 25, (line[3] * 7) + 25, (line[4] * 7) + 25);
+                g.DrawLine(pen, a, b);
             }
         }
 

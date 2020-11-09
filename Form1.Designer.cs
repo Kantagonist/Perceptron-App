@@ -160,11 +160,11 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(836, 634);
+            this.button4.Location = new System.Drawing.Point(824, 719);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(161, 23);
             this.button4.TabIndex = 13;
-            this.button4.Text = "create Line";
+            this.button4.Text = "Debug Line Creation";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
