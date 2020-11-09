@@ -8,4 +8,5 @@ This can be done with a purely deterministic greedy algorithm.
 However, that takes too long and teaches me nothing about ML.
 Instead i will build a linear classifier, using a purpose-built perceptron
 
-In general, the idea is to generate a model, let the perceptron learn it and let him find the answer.
+In general, the idea is to generate a model and let the perceptron adjust its weights.
+Afterwards, the user can test the machine for a given point and get his assumption of what color the point is.
