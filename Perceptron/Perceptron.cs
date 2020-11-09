@@ -34,7 +34,7 @@ namespace Perceptron_App
             //actual learning, but capped with a hard stop if iteration error can not be reached
             float[] y;
             List<ModelPoint> misclassified = new List<ModelPoint>();
-            int hardStop = 1000000; //adjust at will
+            int hardStop = 100000; //adjust at will
             for(int iteration = 0; iteration < hardStop; ++iteration)
             {
                 //reset counters and arrays
@@ -67,9 +67,12 @@ namespace Perceptron_App
                 }
 
                 //calculate the iteration error, if below the set threshhold, break the loop
-                float correctMargin =(float)misclassified.Count / (float)points.Count;
-                printLearnCycleOnConsole(iteration, misclassified.Count);
-                if (correctMargin >= iterationError) break;
+                float missclassMargin = ((float)misclassified.Count) / ((float)points.Count);
+                printLearnCycleOnConsole(iteration, misclassified.Count, missclassMargin);
+                if (missclassMargin <= (1f - iterationError))
+                {
+                    break;
+                }
             }
 
             //fills in the newly found decision boundary
@@ -113,12 +116,13 @@ namespace Perceptron_App
             this.Solution = new Straightline(m, xIntercept);
         }
 
-        private void printLearnCycleOnConsole(int cycle, int amountOfMisclassified)
+        private void printLearnCycleOnConsole(int cycle, int amountOfMisclassified, float correctMargin)
         {
             Console.WriteLine(
                 "Cycle:\t" + cycle +
                 "\tweights:\t{" + weights[0] + ", " + weights[1] + ", " + weights[2] + "´}" +
-                "\twrong:\t" + amountOfMisclassified);
+                "\twrong:\t" + amountOfMisclassified + 
+                "\twrong:\t" + correctMargin);
         }
     }
 }
