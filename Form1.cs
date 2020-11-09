@@ -117,6 +117,13 @@ namespace Perceptron_App
             RedrawModel(modelGenerator.points, Solution);
         }
 
+        /// <summary>
+        /// Ignores all user input which isn't a digit key.
+        /// Pasting in words is still possible, but the content of the textfield is parsed through int.
+        /// This way, wrong input is prevented.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar))
@@ -125,8 +132,19 @@ namespace Perceptron_App
             }
         }
 
+        /// <summary>
+        /// Tests the given Point on the canvas.
+        /// Prints it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
+            if(g == null)
+            {
+                return;
+            }
+
             int x, y;
             if(textBox2.Text == "" || textBox3.Text == "")
             {
@@ -135,7 +153,10 @@ namespace Perceptron_App
                     x = int.Parse(textBox2.Text);
                     y = int.Parse(textBox3.Text);
                     Color solution = S.TestPoint(x, y);
-                    //TODO paint the point on the model
+                    SolidBrush brush = new SolidBrush(solution);
+                    //TODO find out why he doesn't paint
+                    g.FillEllipse(brush, 25 + (x*7), 700 - (y*7), 7, 7 );
+                    brush.Dispose();
                 }catch(FormatException exception)
                 {
                     MessageBox.Show("Please input a point between 0 and 99 into the fields for X and Y, otherwise the system recognizes a wrong input");
