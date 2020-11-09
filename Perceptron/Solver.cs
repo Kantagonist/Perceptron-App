@@ -40,16 +40,8 @@ namespace Perceptron_App
     /// </summary>
     class Straightline
     {
-        float M
-        {
-            get { return M; }
-            set { M = value; }
-        }
-        float B
-        {
-            get { return B; }
-            set { B = value; }
-        }
+        float M;
+        float B;
 
         public Straightline(float m, float b )
         {
