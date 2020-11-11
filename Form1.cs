@@ -122,15 +122,22 @@ namespace Perceptron_App
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            //solves the point list to a 95% accuracy
-            Straightline Solution = S.FindSolutionFor(modelGenerator.points, Debug);
-            
-            if(Debug)
+            try
             {
-                Console.WriteLine(Solution.ToString());
+                //solves the point list to a 95% accuracy
+                Straightline Solution = S.FindSolutionFor(modelGenerator.points, Debug);
+
+                if (Debug)
+                {
+                    Console.WriteLine(Solution.ToString());
+                }
+
+                RedrawModel(modelGenerator.points, Solution);
             }
-            
-            RedrawModel(modelGenerator.points, Solution);
+            catch(NoSolutionException noSolutionException)
+            {
+                MessageBox.Show(noSolutionException.Message);
+            }
         }
 
         /// <summary>

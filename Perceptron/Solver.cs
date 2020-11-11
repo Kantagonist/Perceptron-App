@@ -72,8 +72,11 @@ namespace Perceptron_App
     /// <summary>
     /// Signals the non-solvability of the model.
     /// </summary>
-    class NoSolutionException : System.Exception
+    class NoSolutionException : Exception
     {
-
+        public NoSolutionException(string message) : base(message)
+        {
+            
+        }
     }
 }

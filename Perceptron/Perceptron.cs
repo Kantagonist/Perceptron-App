@@ -79,6 +79,10 @@ namespace Perceptron_App
                 {
                     break;
                 }
+                if (iteration == hardStop - 1)
+                {
+                    throw new NoSolutionException("Sorry, the system was unable to find a solution because it ran out of cycles");
+                }
             }
 
             //fills in the newly found decision boundary
