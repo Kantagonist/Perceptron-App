@@ -59,19 +59,19 @@ namespace Perceptron_App
             //paints the straight line on the canvas
             if(decisionBoundary != null)
             {
-                int[] line = new int[4];
+                float[] line = new float[4];
                 for (int i = 0; i <= 100; ++i)
                 {
                     if (decisionBoundary.F(i) >= 0)
                     {
                         line[0] = i;
-                        line[1] = (int)decisionBoundary.F(i);
+                        line[1] = decisionBoundary.F(i);
                         for (int j = i; j <= 100; ++j)
                         {
                             if (decisionBoundary.F(j) >= 100)
                             {
                                 line[2] = j;
-                                line[3] = (int)decisionBoundary.F(j);
+                                line[3] = decisionBoundary.F(j);
                                 break;
                             }
                         }
@@ -79,8 +79,8 @@ namespace Perceptron_App
                     }
                 }
                 Pen pen = new Pen(Color.Blue);
-                Point a = new Point((line[0] * 7) + 25, (line[1] * 7) + 25);
-                Point b = new Point((line[2] * 7) + 25, (line[3] * 7) + 25);
+                Point a = new Point((int)((line[0] * 7) + 25), (int)((line[1] * 7) + 25));
+                Point b = new Point((int)((line[2] * 7) + 25), (int)((line[3] * 7) + 25));
 
                 if (Debug) 
                 {

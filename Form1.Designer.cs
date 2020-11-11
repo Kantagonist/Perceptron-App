@@ -176,12 +176,13 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.radioButton2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Perception Generator";
+            this.Text = "Perceptron App";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
