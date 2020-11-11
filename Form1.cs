@@ -186,15 +186,5 @@ namespace Perceptron_App
                 }
             }
         }
-
-        
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Random rand = new Random();
-            float m = rand.Next(1, 4);
-            float b = 20f;
-            Straightline y = new Straightline(m, b);
-            RedrawModel(modelGenerator.points, y);
-        }
     }
 }
