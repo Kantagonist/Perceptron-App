@@ -13,10 +13,11 @@ namespace Perceptron_App
     {
         public float[] weights;
         public Straightline Solution;
+        internal bool Debug;
 
-        internal Perceptron()
+        internal Perceptron(bool debug)
         {
-
+            Debug = debug;
         }
 
         /// <summary>
@@ -68,7 +69,12 @@ namespace Perceptron_App
 
                 //calculate the iteration error, if below the set threshhold, break the loop
                 float missclassMargin = ((float)misclassified.Count) / ((float)points.Count);
-                printLearnCycleOnConsole(iteration, misclassified.Count, missclassMargin);
+
+                if (Debug)
+                {
+                    printLearnCycleOnConsole(iteration, misclassified.Count, missclassMargin);
+                }
+                
                 if (missclassMargin <= (1f - iterationError))
                 {
                     break;

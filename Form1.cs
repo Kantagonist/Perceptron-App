@@ -17,6 +17,9 @@ namespace Perceptron_App
         List<Point> Line = new List<Point>();
         private Graphics g;
         Solver S = new Solver();
+        
+        //enables printing crucial local variables for debugging
+        bool Debug = true;
 
         public Form1()
         {
@@ -78,7 +81,12 @@ namespace Perceptron_App
                 Pen pen = new Pen(Color.Blue);
                 Point a = new Point((line[0] * 7) + 25, (line[1] * 7) + 25);
                 Point b = new Point((line[2] * 7) + 25, (line[3] * 7) + 25);
-                //TODO fix the out of bound error, probably because the m in straightline doesn't translate
+
+                if (Debug) 
+                {
+                    Console.WriteLine("Translated Points:\t" + a.ToString() + "\t" + b.ToString());
+                }
+
                 g.DrawLine(pen, a, b);
             }
         }
@@ -91,10 +99,12 @@ namespace Perceptron_App
             {
                 //generating the model
                 List<ModelPoint> model = modelGenerator.GenerateNewSet(int.Parse(amount), radioButton2.Checked);
-                
-                //prints the given model on the console (enable for debugging)
-                //Console.WriteLine(modelGenerator.toString());
-                
+
+                if (Debug) 
+                { 
+                    Console.WriteLine(modelGenerator.toString());
+                }
+
                 //drawing the newly generated model on the canvas
                 RedrawModel(model, null);
             }
@@ -113,7 +123,13 @@ namespace Perceptron_App
         private void button2_Click(object sender, EventArgs e)
         {
             //solves the point list to a 95% accuracy
-            Straightline Solution = S.FindSolutionFor(modelGenerator.points);
+            Straightline Solution = S.FindSolutionFor(modelGenerator.points, Debug);
+            
+            if(Debug)
+            {
+                Console.WriteLine(Solution.ToString());
+            }
+            
             RedrawModel(modelGenerator.points, Solution);
         }
 

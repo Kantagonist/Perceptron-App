@@ -17,9 +17,9 @@ namespace Perceptron_App
     {
         Perceptron p;
 
-        public Straightline FindSolutionFor(List<ModelPoint> model)
+        public Straightline FindSolutionFor(List<ModelPoint> model, bool debug)
         {
-            p = new Perceptron();
+            p = new Perceptron(debug);
             p.train(model, 0.95f);
             return p.Solution;
         }
@@ -52,6 +52,20 @@ namespace Perceptron_App
         public float F(int x)
         {
             return (M * x) + B;
+        }
+
+        public override string ToString()
+        {
+            string result = "Line: y = " + M + "x ";
+            if(B < 0)
+            {
+                result += "- " + B;
+            }
+            else
+            {
+                result += "+ " + B;
+            }
+            return result;
         }
     }
 
