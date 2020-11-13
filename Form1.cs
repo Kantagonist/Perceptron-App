@@ -171,7 +171,7 @@ namespace Perceptron_App
             }
 
             int x, y;
-            if(textBox2.Text == "" || textBox3.Text == "")
+            if(textBox2.Text != "" && textBox3.Text != "")
             {
                 try
                 {
@@ -179,9 +179,9 @@ namespace Perceptron_App
                     y = int.Parse(textBox3.Text);
                     Color solution = S.TestPoint(x, y);
                     SolidBrush brush = new SolidBrush(solution);
-                    //TODO find out why he doesn't paint
-                    g.FillEllipse(brush, 25 + (x*7), 700 - (y*7), 7, 7 );
+                    g.FillEllipse(brush, 25 + (x*7), 700 - (y*7), 7, 7 ); // TODO build this into the redraw
                     brush.Dispose();
+                    MessageBox.Show("The perceptron thinks this point is " + solution.ToString());
                 }catch(FormatException exception)
                 {
                     MessageBox.Show("Please input a point between 0 and 99 into the fields for X and Y, otherwise the system recognizes a wrong input");
