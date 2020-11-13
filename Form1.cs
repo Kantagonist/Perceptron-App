@@ -17,6 +17,7 @@ namespace Perceptron_App
         List<Point> Line = new List<Point>();
         private Graphics g;
         Solver S = new Solver();
+        Straightline Solution;
         
         //enables printing crucial local variables for debugging
         bool Debug = true;
@@ -26,7 +27,7 @@ namespace Perceptron_App
             InitializeComponent();
         }
 
-        private void RedrawModel(List<ModelPoint> model, Straightline decisionBoundary)
+        private void RedrawModel(List<ModelPoint> model, Straightline decisionBoundary, int newPointX, int newPointy, Color newPointColor)
         {
             //draws the dataset on the canvas
             g = this.CreateGraphics();
@@ -91,6 +92,13 @@ namespace Perceptron_App
 
                 g.DrawLine(pen, a, b);
             }
+
+            if(newPointX >= 0 && newPointy >= 0)
+            {
+                SolidBrush brush = new SolidBrush(newPointColor);
+                g.FillEllipse(brush, 25 + (newPointX * 7), 700 - (newPointy * 7), 7, 7);
+                brush.Dispose();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -108,7 +116,7 @@ namespace Perceptron_App
                 }
 
                 //drawing the newly generated model on the canvas
-                RedrawModel(model, null);
+                RedrawModel(model, null, -1, -1, Color.Black);
             }
             catch (System.FormatException exception)
             {
@@ -127,14 +135,14 @@ namespace Perceptron_App
             try
             {
                 //solves the point list to a 95% accuracy
-                Straightline Solution = S.FindSolutionFor(modelGenerator.points, Debug);
+                Solution = S.FindSolutionFor(modelGenerator.points, Debug);
 
                 if (Debug)
                 {
                     Console.WriteLine(Solution.ToString());
                 }
 
-                RedrawModel(modelGenerator.points, Solution);
+                RedrawModel(modelGenerator.points, Solution, -1, -1, Color.Black);
             }
             catch(NoSolutionException noSolutionException)
             {
@@ -178,9 +186,7 @@ namespace Perceptron_App
                     x = int.Parse(textBox2.Text);
                     y = int.Parse(textBox3.Text);
                     Color solution = S.TestPoint(x, y);
-                    SolidBrush brush = new SolidBrush(solution);
-                    g.FillEllipse(brush, 25 + (x*7), 700 - (y*7), 7, 7 ); // TODO build this into the redraw
-                    brush.Dispose();
+                    RedrawModel(modelGenerator.points, Solution, x, y, solution);
                     MessageBox.Show("The perceptron thinks this point is " + solution.ToString());
                 }catch(FormatException exception)
                 {
