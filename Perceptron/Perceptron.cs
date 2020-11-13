@@ -121,8 +121,10 @@ namespace Perceptron_App
         /// <returns></returns>
         private void getFunction()
         {
-            float m = (-(weights[0] / weights[2])) / (weights[0] / weights[1]);
-            float xIntercept = (-weights[0]) / weights[2];
+            //float m = (-weights[0] / weights[2]) / (weights[0] / weights[1]);
+            float xIntercept = -weights[0] / weights[2];
+            float yIntercept = -weights[0] / weights[1];
+            float m = yIntercept / xIntercept;
             this.Solution = new Straightline(m, xIntercept);
         }
 

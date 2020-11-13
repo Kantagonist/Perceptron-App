@@ -66,7 +66,7 @@ namespace Perceptron_App
                     if (yZero >= 0 && yZero <= 1)
                     {
                         line[0] = i;
-                        line[1] = (int)yZero;
+                        line[1] = yZero;
                         for (int j = 0; j <= 100; ++j)
                         {
                             float yHundred = decisionBoundary.F(j);

@@ -59,11 +59,11 @@ namespace Perceptron_App
             string result = "Line: y = " + M + "x ";
             if(B < 0)
             {
-                result += B;
+                result += "- " + Math.Abs(B);
             }
             else
             {
-                result += "+" + B;
+                result += "+ " + B;
             }
             return result;
         }
