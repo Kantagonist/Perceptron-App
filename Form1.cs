@@ -62,16 +62,18 @@ namespace Perceptron_App
                 float[] line = new float[4];
                 for (int i = 0; i <= 100; ++i)
                 {
-                    if (decisionBoundary.F(i) >= 0)
+                    float yZero = decisionBoundary.F(i);
+                    if (yZero >= 0 && yZero <= 1)
                     {
                         line[0] = i;
-                        line[1] = decisionBoundary.F(i);
-                        for (int j = i; j <= 100; ++j)
+                        line[1] = (int)yZero;
+                        for (int j = 0; j <= 100; ++j)
                         {
-                            if (decisionBoundary.F(j) >= 100)
+                            float yHundred = decisionBoundary.F(j);
+                            if (yHundred >= 100 && yHundred <= 101)
                             {
                                 line[2] = j;
-                                line[3] = decisionBoundary.F(j);
+                                line[3] = yHundred;
                                 break;
                             }
                         }
@@ -79,8 +81,8 @@ namespace Perceptron_App
                     }
                 }
                 Pen pen = new Pen(Color.Blue);
-                Point a = new Point((int)((line[0] * 7) + 25), (int)((line[1] * 7) + 25));
-                Point b = new Point((int)((line[2] * 7) + 25), (int)((line[3] * 7) + 25));
+                Point a = new Point((int)((line[0] * 7) + 25), (int)((line[1] * 7) + 25)); //point for 0 <= f(x) <= 1
+                Point b = new Point((int)((line[2] * 7) + 25), (int)((line[3] * 7) + 25)); //point for 100 <= f(x) <= 101
 
                 if (Debug) 
                 {
